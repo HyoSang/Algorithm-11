@@ -86,6 +86,11 @@ void Insert_Fixup(node_pointer root, node_pointer z) {
 void Insert_Node(node_pointer root, node_pointer z) {
 	node_pointer y = New_Node(), x = root;
 	
+	if (Find_Node(root, z->seatnum) != NULL) {
+		printf("%d is already occupied \n", x->seatnum);
+		return;
+	}
+
 	if (root->seatnum == -1) {	root = z;	return;	}
 
 	while (x != NULL) {
@@ -118,11 +123,6 @@ node_pointer Find_Node(node_pointer root, int seat) {
 
 void Delete_Fixup(node_pointer root, node_pointer x) {
 	node_pointer w = New_Node();
-
-	if (Find_Node(root, x->seatnum) == NULL) {
-		printf("There is no %d\n", x->seatnum);
-		return;
-	}
 
 	while (x != root && x->color == 1) {
 		if (x == x->parent->left) {
@@ -181,6 +181,12 @@ void Delete_Fixup(node_pointer root, node_pointer x) {
 
 void Delete_Node(node_pointer root, node_pointer z) {
 	node_pointer y = New_Node(), x = New_Node();
+
+	if (Find_Node(root, z->seatnum) == NULL) {
+		printf("There is no %d\n", z->seatnum);
+		return;
+	}
+
 	if (z->left == NULL || z->right == NULL)	y = z;
 	else y = Tree_Successor(z);
 
