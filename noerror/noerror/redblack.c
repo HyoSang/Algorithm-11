@@ -1,6 +1,6 @@
 #include "redblack.h"
 
-RBNode* Nil; // NULL°ªÀ¸·Î ´Ù Æ÷ÀÎÆÃ ÇØÁÙ°Å
+RBNode* Nil; // NULLÂ°ÂªÃ€Â¸Â·ÃŽ Â´Ã™ Ã†Ã·Ã€ÃŽÃ†Ãƒ Ã‡Ã˜ÃÃ™Â°Ã…
 
 RBNode* Create(int NewData)
 {
@@ -99,12 +99,12 @@ void Insert(RBNode** Tree, RBNode* NewNode)
 	NewNode->Left = Nil;
 	NewNode->Right = Nil;
 
-	InsertHelp(Tree, NewNode);
+	InsertAfter(Tree, NewNode);
 }
 
 void InsertHelp(RBNode** Tree, RBNode* NewNode)
 {
-	if( (*Tree) = NULL)
+	if( (*Tree) == NULL)
 		(*Tree) = NewNode;
 
 	if( (*Tree)->Data < NewNode->Data)
@@ -254,7 +254,7 @@ void DeleteAfter(RBNode** Root, RBNode* Successor)
 
 				else
 				{
-					if(Sibling ->Left ->Color = Red)
+					if(Sibling ->Left ->Color == Red)
 					{
 						Sibling->Left->Color = Black;
 						Sibling->Color = Red;
