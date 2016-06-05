@@ -4,33 +4,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+enum Color {Red, Black} ;
 typedef struct tagNode
 {
 	struct tagNode* Parent;
 	struct tagNode* Left;
 	struct tagNode* Right;
 
-	enum {Red, Black} Color;
+	enum Color Color;
 
 	int Data;
 } RBNode;
-// µ¥ÀÌÅÍ ¹¹ ³ÖÀ»Áö µüÈ÷ ¾ÈÁ¤ÇØÁ®¼­ int·Î Áı¾î³Ö¾ú½À´Ï´ç
+// ë°ì´í„° ë­ ë„£ì„ì§€ ë”±íˆ ì•ˆì •í•´ì ¸ì„œ intë¡œ ì§‘ì–´ë„£ì—ˆìŠµë‹ˆë‹¹
 
-/*Tree È¸Àü*/
+/*Tree íšŒì „*/
 void RotateLeft(RBNode** Root, RBNode* Parent);
 void RotateRight(RBNode** Root, RBNode* Parent);
 
-/* Tree »ı¼º ¹× Á¦°Å */
+/* Tree ìƒì„± ë° ì œê±° */
 RBNode* Create(int NewData);
-void Destroy(RBNode* Node); // Node Á¦°Å
-void TreeDestroy(RBNode* Tree); // Tree Á¦°Å
+void Destroy(RBNode* Node); // Node ì œê±°
+void TreeDestroy(RBNode* Tree); // Tree ì œê±°
 
-/*Insertion °ü·Ã */
+/*Insertion ê´€ë ¨ */
 void Insert(RBNode** Tree, RBNode* NewNode);
 void InsertHelp(RBNode** Tree, RBNode* NewNode);
 void InsertAfter(RBNode** Tree, RBNode* NewNode);
 
-/*Deletion °ü·Ã */
+/*Deletion ê´€ë ¨ */
 RBNode* Delete(RBNode** Root, int target);
 void DeleteAfter(RBNode** Root, RBNode* rbnode);
 
