@@ -320,3 +320,37 @@ RBNode* Search(RBNode* Tree, int target)
 	else
 		return Tree;
 }
+
+void Print(RBNode* Node, int depth, int black)
+{
+	int i = 0;
+	char c = 'a';
+	int v = -1;
+	char cnt[1000];
+
+	if(Node == NULL || Node == Nil)
+		return;
+
+	if(Node->Color == Black)
+		black++;
+
+	if(Node->Parent != NULL)
+	{
+		v = Node->Parent->Data;
+
+		if(Node->Parent->Left == Node)
+			c = 'l'; // LEFTCHILD
+		else
+			c = 'r'; //RIGHTCHILD
+	}
+
+	if(Node->Left == Nil && Node->Right == Nil)
+		sprintf(cnt,"..%d",black);
+	else
+		sprintf(cnt," ");
+
+	printf("%d %s [%c, %d] %s\n",Node->Data, (Node->Color == Red)?"Red":"Black",c,v,cnt);
+
+	Print(Node->Left,depth+1, black);
+	Print(Node->Right,depth+1, black);
+}
