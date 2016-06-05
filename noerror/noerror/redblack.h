@@ -13,7 +13,9 @@ typedef struct tagNode
 
 	enum Color Color;
 
+	int ox;
 	int Data;
+	
 } RBNode;
 // 데이터 뭐 넣을지 딱히 안정해져서 int로 집어넣었습니당
 
@@ -22,7 +24,7 @@ void RotateLeft(RBNode** Root, RBNode* Parent);
 void RotateRight(RBNode** Root, RBNode* Parent);
 
 /* Tree 생성 및 제거 */
-RBNode* Create(int NewData);
+RBNode* Create(int NewData,int ox);
 void Destroy(RBNode* Node); // Node 제거
 void TreeDestroy(RBNode* Tree); // Tree 제거
 
@@ -38,5 +40,4 @@ void DeleteAfter(RBNode** Root, RBNode* rbnode);
 RBNode* SearchMin(RBNode* Tree);
 RBNode* Search(RBNode* Tree, int target);
 void Print(RBNode* Node, int depth, int black);
-
 #endif

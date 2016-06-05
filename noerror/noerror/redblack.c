@@ -1,8 +1,8 @@
 #include "redblack.h"
 
-RBNode* Nil; // NULLÂ°ÂªÃ€Â¸Â·ÃŽ Â´Ã™ Ã†Ã·Ã€ÃŽÃ†Ãƒ Ã‡Ã˜ÃÃ™Â°Ã…
+RBNode Nil; // NULL°ªÀ¸·Î ´Ù Æ÷ÀÎÆÃ ÇØÁÙ°Å
 
-RBNode* Create(int NewData)
+RBNode* Create(int NewData,int ox)
 {
 	RBNode* NewNode = (RBNode*) malloc(sizeof(RBNode));
 	NewNode->Parent = NULL;
@@ -10,7 +10,7 @@ RBNode* Create(int NewData)
 	NewNode->Right = NULL;
 	NewNode->Data = NewData;
 	NewNode->Color = Black;
-
+	NewNode->ox = ox; //ÀÚ¸®¿¡ »ç¶÷ÀÌ ÀÖ´ÂÁö ¾ø´ÂÁö ¿©ºÎ¸¦ ÀúÀåÇÕ´Ï´Ù.
 	return NewNode;
 }
 
@@ -21,14 +21,14 @@ void Destroy(RBNode* Node)
 
 void TreeDestroy(RBNode* Tree)
 {
-	if(Tree->Right != Nil)
+	if(Tree->Right != &Nil)
 		TreeDestroy(Tree->Right);
 
-	if(Tree->Left != Nil)
+	if(Tree->Left != &Nil)
 		TreeDestroy(Tree->Left);
 
-	Tree->Left = Nil;
-	Tree->Right = Nil;
+	Tree->Left = &Nil;
+	Tree->Right = &Nil;
 
 	Destroy(Tree);
 }
@@ -38,7 +38,7 @@ void RotateRight(RBNode** Root, RBNode* Parent)
 	RBNode* LeftChild = Parent->Left;
 	Parent->Left = LeftChild->Right;
 	
-	if(LeftChild->Right != Nil)
+	if(LeftChild->Right != &Nil)
 		LeftChild->Right->Parent = Parent;
 
 	LeftChild->Parent = Parent->Parent;
@@ -62,7 +62,7 @@ void RotateLeft(RBNode** Root, RBNode* Parent)
 	RBNode* RightChild = Parent->Right;
 	Parent->Right = RightChild->Left;
 
-	if(RightChild->Left != Nil)
+	if(RightChild->Left != &Nil)
 		RightChild->Left->Parent = Parent;
 
 	RightChild->Parent = Parent ->Parent;
@@ -83,10 +83,10 @@ void RotateLeft(RBNode** Root, RBNode* Parent)
 
 RBNode* SearchMin(RBNode* Tree)
 {
-	if(Tree == Nil)
-		return Nil;
+	if(Tree == &Nil)
+		return &Nil;
 
-	if(Tree->Left == Nil)
+	if(Tree->Left == &Nil)
 		return Tree;
 	else
 		return SearchMin(Tree->Left);
@@ -96,8 +96,8 @@ void Insert(RBNode** Tree, RBNode* NewNode)
 	InsertHelp(Tree, NewNode);
 
 	NewNode->Color = Red;
-	NewNode->Left = Nil;
-	NewNode->Right = Nil;
+	NewNode->Left = &Nil;
+	NewNode->Right = &Nil;
 
 	InsertAfter(Tree, NewNode);
 }
@@ -109,7 +109,7 @@ void InsertHelp(RBNode** Tree, RBNode* NewNode)
 
 	if( (*Tree)->Data < NewNode->Data)
 	{
-		if( (*Tree) ->Right == Nil)
+		if( (*Tree) ->Right == &Nil)
 		{
 			(*Tree) ->Right = NewNode;
 			NewNode->Parent = (*Tree);
@@ -120,7 +120,7 @@ void InsertHelp(RBNode** Tree, RBNode* NewNode)
 
 	else if((*Tree) ->Data > NewNode->Data)
 	{
-		if( (*Tree)->Left == Nil)
+		if( (*Tree)->Left == &Nil)
 		{
 			(*Tree)->Left = NewNode;
 			NewNode->Parent = (*Tree);
@@ -196,7 +196,7 @@ RBNode* Delete(RBNode** Root, int Data)
 	if(Target == NULL)
 		return NULL;
 
-	if(Target->Left == Nil || Target->Right == Nil)
+	if(Target->Left == &Nil || Target->Right == &Nil)
 		Deleted = Target;
 	else
 	{
@@ -204,7 +204,7 @@ RBNode* Delete(RBNode** Root, int Data)
 		Target->Data = Deleted->Data;
 	}
 
-	if(Deleted->Left != Nil)
+	if(Deleted->Left != &Nil)
 		Successor = Deleted->Left;
 	else
 
@@ -254,7 +254,7 @@ void DeleteAfter(RBNode** Root, RBNode* Successor)
 
 				else
 				{
-					if(Sibling ->Left ->Color == Red)
+					if(Sibling ->Left ->Color = Red)
 					{
 						Sibling->Left->Color = Black;
 						Sibling->Color = Red;
@@ -310,7 +310,7 @@ void DeleteAfter(RBNode** Root, RBNode* Successor)
 
 RBNode* Search(RBNode* Tree, int target)
 {
-	if (Tree == Nil)
+	if (Tree == &Nil)
 		return NULL;
 	
 	if(Tree->Data > target)
@@ -320,7 +320,6 @@ RBNode* Search(RBNode* Tree, int target)
 	else
 		return Tree;
 }
-
 void Print(RBNode* Node, int depth, int black)
 {
 	int i = 0;
@@ -328,29 +327,29 @@ void Print(RBNode* Node, int depth, int black)
 	int v = -1;
 	char cnt[1000];
 
-	if(Node == NULL || Node == Nil)
+	if (Node == NULL || Node == &Nil)
 		return;
 
-	if(Node->Color == Black)
+	if (Node->Color == Black)
 		black++;
 
-	if(Node->Parent != NULL)
+	if (Node->Parent != NULL)
 	{
 		v = Node->Parent->Data;
 
-		if(Node->Parent->Left == Node)
+		if (Node->Parent->Left == Node)
 			c = 'l'; // LEFTCHILD
 		else
 			c = 'r'; //RIGHTCHILD
 	}
 
-	if(Node->Left == Nil && Node->Right == Nil)
-		sprintf(cnt,"..%d",black);
+	if (Node->Left == &Nil && Node->Right == &Nil)
+		sprintf(cnt, "..%d", black);
 	else
-		sprintf(cnt," ");
+		sprintf(cnt, " ");
 
-	printf("%d %s [%c, %d] %s\n",Node->Data, (Node->Color == Red)?"Red":"Black",c,v,cnt);
+	printf("%d %s [%c, %d] %s\n", Node->Data, (Node->Color == Red) ? "Red" : "Black", c, v, cnt);
 
-	Print(Node->Left,depth+1, black);
-	Print(Node->Right,depth+1, black);
+	Print(Node->Left, depth + 1, black);
+	Print(Node->Right, depth + 1, black);
 }
