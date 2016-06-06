@@ -80,10 +80,10 @@ void printReservation(RBNode ** (movie)[3], int mNum, int seatnum)	// 예약 후 에
 		for (j = i * 30 + 1; j <= (i + 1) * 30; j++)
 		{
 			if (j == seatnum) {
-				if (Search(*movie[mNum], j)->ox == 0) printf("☆");
+				if (Search(*movie[mNum], j) == NULL) printf("☆");
 				else printf("★");
 			}
-			else if (Search(*movie[mNum], j)->ox == 1)	printf("■");
+			else if (Search(*movie[mNum], j) != NULL)	printf("■");
 			else printf("□");
 
 			if (j == i * 30 + 7 || j == i * 30 + 23)printf("  ");
@@ -501,8 +501,8 @@ int main(void)
 								scanf("%d", &t);
 								if (t == 1) {
 									seatnum = ((row - 65) * 30) + column;								// 입력받은 좌석 위치를 node의 data형으로 바꿔줌
-									if (Search(*(movie[q - 1]->mv[k][d - 1]), seatnum)->ox == 0) {
-										Search(*(movie[q - 1]->mv[k][d - 1]), seatnum)->ox = 1;
+									if (Search(*(movie[q - 1]->mv[k][d - 1]), seatnum) == NULL) {
+										Insert(movie[q - 1]->mv[k][d - 1], Create(seatnum));
 										printReservation(movie[q - 1]->mv[k], d - 1, seatnum);
 										printf("예약되었습니다.\n");
 										system("pause");
@@ -550,8 +550,8 @@ int main(void)
 								scanf("%d", &t);
 								if (t == 1) {
 									seatnum = ((row - 65) * 30) + column;
-									if (Search(*(movie[q - 1]->mv[k][d - 1]), seatnum)->ox == 1) {
-										Search(*(movie[q - 1]->mv[k][d - 1]), seatnum)->ox = 0;
+									if (Search(*(movie[q - 1]->mv[k][d - 1]), seatnum) != NULL) {
+										Delete(movie[q - 1]->mv[k][d - 1], seatnum);
 										printReservation(movie[q - 1]->mv[k], d - 1, seatnum);
 										printf("취소되었습니다.\n");
 										system("pause");
