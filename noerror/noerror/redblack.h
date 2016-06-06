@@ -13,7 +13,6 @@ typedef struct tagNode
 
 	enum Color Color;
 
-	int ox;
 	int Data;
 	
 } RBNode;
@@ -24,7 +23,7 @@ void RotateLeft(RBNode** Root, RBNode* Parent);
 void RotateRight(RBNode** Root, RBNode* Parent);
 
 /* Tree 생성 및 제거 */
-RBNode* Create(int NewData,int ox);
+RBNode* Create(int NewData);
 void Destroy(RBNode* Node); // Node 제거
 void TreeDestroy(RBNode* Tree); // Tree 제거
 

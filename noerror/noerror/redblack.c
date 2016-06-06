@@ -2,7 +2,7 @@
 
 RBNode Nil; // NULL값으로 다 포인팅 해줄거
 
-RBNode* Create(int NewData,int ox)
+RBNode* Create(int NewData)
 {
 	RBNode* NewNode = (RBNode*) malloc(sizeof(RBNode));
 	NewNode->Parent = NULL;
@@ -10,7 +10,6 @@ RBNode* Create(int NewData,int ox)
 	NewNode->Right = NULL;
 	NewNode->Data = NewData;
 	NewNode->Color = Black;
-	NewNode->ox = ox; //자리에 사람이 있는지 없는지 여부를 저장합니다.
 	return NewNode;
 }
 

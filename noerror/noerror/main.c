@@ -36,7 +36,7 @@ void generateSeat(RBNode** (movie)[3]) //좌석 랜덤생성 함수입니다.
 		
 		for (j = 1; j <= 300; j++)
 		{
-			Insert(movie[i], Create(j, randArray[j - 1]));
+			if(randArray[j]==1)Insert(movie[i], Create(j));
 		}
 	}
 }
@@ -56,7 +56,7 @@ void print(RBNode ** (movie)[3], int mNum)//좌석 출력하는 함수입니다. mNum에는 �
 		printf("%c ", 'A' + i);
 		for (j = i * 30 + 1; j <= (i + 1) * 30; j++)
 		{
-			if (Search(*movie[mNum], j)->ox == 1)printf("■");
+			if (Search(*movie[mNum], j)!= NULL)printf("■");
 			else printf("□");
 			if (j == i * 30 + 7 || j == i * 30 + 23)printf("  ");
 		}
