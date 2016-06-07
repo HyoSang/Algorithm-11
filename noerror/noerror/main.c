@@ -505,6 +505,7 @@ int main(void)
 										Insert(movie[q - 1]->mv[k][d - 1], Create(seatnum));
 										printReservation(movie[q - 1]->mv[k], d - 1, seatnum);
 										printf("예약되었습니다.\n");
+										Print_Property(*(movie[q - 1]->mv[k][d - 1]));
 										system("pause");
 									}
 									else {
@@ -554,12 +555,12 @@ int main(void)
 										Delete(movie[q - 1]->mv[k][d - 1], seatnum);
 										printReservation(movie[q - 1]->mv[k], d - 1, seatnum);
 										printf("취소되었습니다.\n");
+										Print_Property(*(movie[q - 1]->mv[k][d - 1]));
 										system("pause");
 									}
 									else {
-										printf("이미 예약된 자리 입니다.\n"); system("pause"); continue;
+										printf("예약된 자리가 아닙니다.\n"); system("pause"); continue;
 									}
-
 								}
 								break;
 							}

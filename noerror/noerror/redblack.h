@@ -39,4 +39,7 @@ void DeleteAfter(RBNode** Root, RBNode* rbnode);
 RBNode* SearchMin(RBNode* Tree);
 RBNode* Search(RBNode* Tree, int target);
 void Print(RBNode* Node, int depth, int black);
+void Print_Property(RBNode* Tree);
+void Print_Leaves(RBNode* Tree);
+
 #endif

@@ -1,6 +1,8 @@
 #include "redblack.h"
 
 RBNode Nil; // NULL값으로 다 포인팅 해줄거
+int num;
+int height;
 
 RBNode* Create(int NewData)
 {
@@ -351,4 +353,35 @@ void Print(RBNode* Node, int depth, int black)
 
 	Print(Node->Left, depth + 1, black);
 	Print(Node->Right, depth + 1, black);
+}
+
+void Print_Property(RBNode* Tree) {
+	num = 0; height = 1;
+	printf("The Root of Tree - Seat Num : %3d\tColor : ", Tree->Data);
+	Tree->Color == 0 ? printf("Red\n") : printf("Black\n");
+
+	Print_Leaves(Tree);
+	printf("The number of node in Tree - %d\n", num);
+	printf("The Height of Tree - %d\n", height);
+}
+void Print_Leaves(RBNode* Tree) {
+	if (Tree == &Nil)
+		return;
+	num++;
+	Print_Leaves(Tree->Left);
+	if (Tree->Left == &Nil && Tree->Right == &Nil) {
+		printf("The Leaf of Tree - Seat Num : %3d\tColor : ", Tree->Data);
+		Tree->Color == 0 ? printf("Red\n") : printf("Black\n"); 
+		RBNode* temp = Tree; int t = 1;
+		while (1) {
+			if (temp->Parent == NULL) {
+				break;
+			}
+			temp = temp->Parent; t++;
+		}
+		if (t > height)	height = t;
+	}
+	Print_Leaves(Tree->Right);
+	
+
 }
