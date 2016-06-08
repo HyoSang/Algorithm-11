@@ -22,9 +22,9 @@ void generateSeat(RBNode** (movie)[3]) //좌석 랜덤생성 함수입니다.
 		{
 			randArray[j] = 0;
 		}
-		j = 0;
+		j = 1;
 		
-		while (j < 210)
+		while (j <= 210)
 		{
 			k = rand() % 300;
 			if (randArray[k] == 0)
