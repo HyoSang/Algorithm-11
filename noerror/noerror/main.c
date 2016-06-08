@@ -12,31 +12,35 @@ typedef struct moive//7은 일주일, 3은 3번의 상영시간 의미합니다.
 
 void generateSeat(RBNode** (movie)[3]) //좌석 랜덤생성 함수입니다.
 {
-	int i, j, k;
+	int i, j, k,l,a,b,tok;
 	int randArray[300];
 	for (i = 0; i < 3; i++)
 	{
 		movie[i] = (RBNode**)malloc(sizeof(RBNode*));
 		(*movie[i]) = NULL;
-		for (j = 0; j < 300; j++)
-		{
-			randArray[j] = 0;
-		}
+				
+		k = 210 + rand() % 90;
+		b = 0;
 		j = 1;
-		
-		while (j <= 210)
+		while(j<k)
 		{
-			k = rand() % 300;
-			if (randArray[k] == 0)
+			tok = 0;
+			l = rand() % 300;
+			for (a = 0; a < 300; a++)
 			{
-				randArray[k] = 1;
+				if (randArray[a] == l)
+				{
+					tok = 1;
+					break;
+				}
+			}
+			if (tok == 0)
+			{
+				randArray[b] = l;
+				b++;
+				Insert(movie[i], Create(l));
 				j++;
 			}
-		}
-		
-		for (j = 1; j <= 300; j++)
-		{
-			if(randArray[j]==1)Insert(movie[i], Create(j));
 		}
 	}
 }
